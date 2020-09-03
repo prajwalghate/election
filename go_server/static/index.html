@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Go WebSocket Tutorial</title>
+  </head>
+  <body>
+    <h2>Hello World</h2>
+     <ul id="messages"></ul>
+	<button>This will relay an event for testing</button>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+	let button = document.querySelector("button");
+
+      button.onclick = () => {
+        console.log("worked!");
+        socket.emit("my event", "this is message!");
+      };
+      
+      socket.on("reply", function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+    </script>
+  </body>
+</html>
